@@ -16,24 +16,24 @@
   }
 }
 
-.login-website-logo-mobile-image {
+.login-website-logo-mobile-img {
   width: 165px;
   margin-top: 50px;
   margin-bottom: 35px;
 }
 
 @media screen and (min-width: 992px) {
-  .login-website-logo-mobile-image {
+  .login-website-logo-mobile-img {
     display: none;
   }
 }
 
-.login-image {
+.login-img {
   width: 278px;
 }
 
 @media screen and (min-width: 992px) {
-  .login-image {
+  .login-img {
     width: 60%;
     max-width: 524px;
     flex-shrink: 1;
@@ -41,12 +41,12 @@
   }
 }
 
-.login-website-logo-desktop-image {
+.login-website-logo-desktop-img {
   width: 185px;
 }
 
 @media screen and (max-width: 991px) {
-  .login-website-logo-desktop-image {
+  .login-website-logo-desktop-img {
     display: none;
   }
 }
@@ -95,6 +95,7 @@
   border-radius: 2px;
   margin-top: 5px;
   padding: 8px 16px 8px 16px;
+  outline: none;
 }
 
 .password-input-field {
@@ -106,6 +107,7 @@
   border-radius: 2px;
   margin-top: 5px;
   padding: 8px 16px 8px 16px;
+  outline: none;
 }
 
 .login-button {
@@ -121,6 +123,7 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  outline: none;
 }
 
 .error-message {
