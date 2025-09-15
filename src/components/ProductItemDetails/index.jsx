@@ -4,6 +4,7 @@ import { SyncLoader } from "react-spinners"
 import { BsPlusSquare, BsDashSquare } from "react-icons/bs"
 import Header from "../Header"
 import SimilarProductItem from "../SimilarProductItem"
+import CartContext from "../../context/CartContext"
 import "./index.css"
 
 const apiStatusConstants = {
@@ -16,22 +17,29 @@ class ProductItemDetails extends Component {
   state = {
     productData: {},
     apiStatus: null,
-    productId: null,
+    productId: this.props.match.params.id,
     quantity: 1,
   }
 
-  componentDidMount() {
-    const { match } = this.props
-    const { id } = match.params
-    this.setState({ productId: id }, this.getProductDetails)
+  // Derive productId safely from props
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { id: nextId } = nextProps.match.params
+    if (nextId !== prevState.productId) {
+      return { productId: nextId }
+    }
+    return null
   }
 
-  componentDidUpdate(prevProps) {
-    const prevId = prevProps.match.params.id
-    const currentId = this.props.match.params.id
+  componentDidMount() {
+    this.getProductDetails()
+  }
 
-    if (prevId !== currentId) {
-      this.setState({ productId: currentId }, this.getProductDetails)
+  componentDidUpdate(prevProps, prevState) {
+    const { productId } = this.state
+    const { productId: prevProductId } = prevState
+
+    if (productId !== prevProductId) {
+      this.getProductDetails()
     }
   }
 
@@ -128,75 +136,91 @@ class ProductItemDetails extends Component {
     )
   }
 
-  renderProductDetailsView = () => {
-    const { productData } = this.state
-    const {
-      title,
-      price,
-      rating,
-      imageUrl,
-      description,
-      availability,
-      brand,
-      totalReviews,
-    } = productData
-
-    const { quantity } = this.state
-    return (
-      <div className="Product-Detailed-view">
-        <div className="product-detailed-img-cnt">
-          <img className="product-detailed-img" src={imageUrl} alt="product" />
-        </div>
-
-        <div className="product-detailed-details">
-          <h1 className="product-item-title">{title}</h1>
-          <p>Rs {price}/-</p>
-          <div className="rating_and_reviews">
-            <div className="rating-container">
-              <p className="rating">{rating}</p>
+  renderProductDetailsView = () => (
+    <CartContext.Consumer>
+      {(value) => {
+        const { addCartItem } = value
+        const { productData, quantity } = this.state
+        const {
+          title,
+          price,
+          rating,
+          imageUrl,
+          description,
+          availability,
+          brand,
+          totalReviews,
+        } = productData
+        const onClickAddToCart = () => {
+          addCartItem({ ...productData, quantity })
+        }
+        return (
+          <div className="Product-Detailed-view">
+            <div className="product-detailed-img-cnt">
               <img
-                src="https://assets.ccbp.in/frontend/react-js/star-img.png"
-                alt="star"
-                className="star"
+                className="product-detailed-img"
+                src={imageUrl}
+                alt="product"
               />
             </div>
-            <p>{totalReviews} Reviews</p>
-          </div>
-          <p>{description}</p>
-          <p>
-            <span className="strong-text">Available: </span>
-            {availability}
-          </p>
-          <p>
-            <span className="strong-text">Brand: </span>
-            {brand}
-          </p>
-          <hr className="horizontal-line" />
-          <div className="plus-minus-quantity-cnt">
-            <button
-              type="button"
-              data-testid="minus"
-              className="wrapper-btn"
-              onClick={this.handleMinus}
-            >
-              <BsDashSquare size={25} color="grey" />
-            </button>
 
-            <p>{quantity}</p>
-            <button
-              type="button"
-              data-testid="plus"
-              className="wrapper-btn"
-              onClick={this.handlePlus}
-            >
-              <BsPlusSquare size={25} color="grey" />
-            </button>
+            <div className="product-detailed-details">
+              <h1 className="product-item-title">{title}</h1>
+              <p>Rs {price}/-</p>
+              <div className="rating_and_reviews">
+                <div className="rating-container">
+                  <p className="rating">{rating}</p>
+                  <img
+                    src="https://assets.ccbp.in/frontend/react-js/star-img.png"
+                    alt="star"
+                    className="star"
+                  />
+                </div>
+                <p>{totalReviews} Reviews</p>
+              </div>
+              <p>{description}</p>
+              <p>
+                <span className="strong-text">Available: </span>
+                {availability}
+              </p>
+              <p>
+                <span className="strong-text">Brand: </span>
+                {brand}
+              </p>
+              <hr className="horizontal-line" />
+              <div className="plus-minus-quantity-cnt">
+                <button
+                  type="button"
+                  data-testid="minus"
+                  className="wrapper-btn"
+                  onClick={this.handleMinus}
+                >
+                  <BsDashSquare size={25} color="grey" />
+                </button>
+
+                <p>{quantity}</p>
+                <button
+                  type="button"
+                  data-testid="plus"
+                  className="wrapper-btn"
+                  onClick={this.handlePlus}
+                >
+                  <BsPlusSquare size={25} color="grey" />
+                </button>
+              </div>
+              <button
+                className="add-to-cart-btn"
+                onClick={onClickAddToCart}
+                type="button"
+              >
+                ADD TO CART
+              </button>
+            </div>
           </div>
-          <button className="add-to-cart-btn">ADD TO CART</button>
-        </div>
-      </div>
-    )
-  }
+        )
+      }}
+    </CartContext.Consumer>
+  )
 
   renderErrorView = () => (
     <div className="product-detailed-item-error-view">
