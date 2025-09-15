@@ -4,7 +4,7 @@ A modern e-commerce application built with React and Context API as part of the 
 
 ## Live Demo
 
--[NxtTrendz](https://nxttrendzak.netlify.app)
+- #### [NxtTrendz](https://nxttrendzak.netlify.app)
 
 ## Features
 
