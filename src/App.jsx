@@ -75,6 +75,10 @@ class App extends Component {
     }))
   }
 
+  clearCart = () => {
+    this.setState({ cartList: [] })
+  }
+
   render() {
     const { cartList } = this.state
     return (
@@ -85,6 +89,7 @@ class App extends Component {
           deleteCartItem: this.deleteCartItem,
           increaseQuantity: this.increaseQuantity,
           decreaseQuantity: this.decreaseQuantity,
+          clearCart: this.clearCart,
         }}
       >
         <Switch>
