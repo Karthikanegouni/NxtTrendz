@@ -2,6 +2,10 @@
 
 A modern e-commerce application built with React and Context API as part of the NxtWave training program. This project demonstrates advanced React concepts including state management, cart functionality, and user authentication.
 
+## Live Demo
+
+-[NxtTrendz](https://nxttrendzak.netlify.app)
+
 ## Features
 
 - **User Authentication**: Secure login and logout functionality
