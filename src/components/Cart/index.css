@@ -43,6 +43,10 @@
   .cart-header > button {
     font-size: 0.8rem;
   }
+  .cart-non-empty-view {
+    min-height: 50vh;
+    flex: 1;
+  }
 }
 
 .cart-header {

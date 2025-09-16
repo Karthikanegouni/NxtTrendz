@@ -3,6 +3,7 @@ import CartListView from "../CartListView"
 import "./index.css"
 import CartContext from "../../context/CartContext"
 import EmptyCartView from "../EmptyCartView"
+import CartCheckoutCard from "../CartCheckoutCard"
 
 const Cart = () => (
   <CartContext.Consumer>
@@ -18,17 +19,20 @@ const Cart = () => (
                 <EmptyCartView />
               ) : (
                 <>
-                  <div className="cart-header">
-                    <h1 className="cart-heading">My Cart</h1>
-                    <button
-                      type="button"
-                      className="custom-btn"
-                      onClick={clearCart}
-                    >
-                      Remove All
-                    </button>
+                  <div className="cart-non-empty-view">
+                    <div className="cart-header">
+                      <h1 className="cart-heading">My Cart</h1>
+                      <button
+                        type="button"
+                        className="custom-btn"
+                        onClick={clearCart}
+                      >
+                        Remove All
+                      </button>
+                    </div>
+                    <CartListView />
                   </div>
-                  <CartListView />
+                  <CartCheckoutCard />
                 </>
               )}
             </div>
