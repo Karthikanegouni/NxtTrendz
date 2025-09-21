@@ -6,6 +6,11 @@ A modern e-commerce application built with React and Context API as part of the 
 
 - #### [NxtTrendz](https://nxttrendzak.netlify.app)
 
+## Live Demo
+
+- ### [Jobby APP LIVE](https://jobbyappkarthik.netlify.app/)   (hosted on Netlify)
+- ### [Live Link](https://jobbyak.ccbp.tech/) (ccbp)
+
 ## Features
 
 - **User Authentication**: Secure login and logout functionality
@@ -121,7 +126,7 @@ npm run build
 # Deploy using Vercel CLI or GitHub integration
 ```
 
-## 📈 Learning Outcomes
+## Learning Outcomes
 
 This project demonstrates proficiency in:
 
