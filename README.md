@@ -6,10 +6,6 @@ A modern e-commerce application built with React and Context API as part of the 
 
 - #### [NxtTrendz](https://nxttrendzak.netlify.app)
 
-## Live Demo
-
-- ### [Jobby APP LIVE](https://jobbyappkarthik.netlify.app/)   (hosted on Netlify)
-- ### [Live Link](https://jobbyak.ccbp.tech/) (ccbp)
 
 ## Features
 
